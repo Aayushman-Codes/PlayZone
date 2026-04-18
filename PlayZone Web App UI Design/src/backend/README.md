@@ -2,7 +2,7 @@
 
 Complete backend API for the PlayZone gaming platform with MongoDB database.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js v14 or higher
@@ -54,7 +54,7 @@ Complete backend API for the PlayZone gaming platform with MongoDB database.
 6. **Verify it's working**:
    Open browser to `http://localhost:5000/api/health`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 backend/
@@ -190,7 +190,7 @@ GET /api/players?limit=50
 DELETE /api/players/:name
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### Player Collection
 ```javascript
@@ -220,7 +220,7 @@ DELETE /api/players/:name
 }
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### MongoDB Local Setup
 ```env
@@ -236,7 +236,7 @@ MONGODB_URI=mongodb://localhost:27017/playzone
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/playzone?retryWrites=true&w=majority
 ```
 
-## 🧪 Testing the API
+## Testing the API
 
 ### Using cURL
 
@@ -270,7 +270,7 @@ curl http://localhost:5000/api/players/Alice/stats
 ### Using Postman
 Import the following base URL: `http://localhost:5000/api`
 
-## 🔗 Connect to Frontend
+## Connect to Frontend
 
 1. **In your frontend code** (`/services/api.ts`):
    ```typescript
@@ -288,7 +288,7 @@ Import the following base URL: `http://localhost:5000/api`
    - Check leaderboard page
    - Verify data in MongoDB
 
-## 🔍 Monitoring
+## Monitoring
 
 ### View MongoDB Data
 
@@ -309,7 +309,7 @@ db.players.find().pretty()
 ### View Logs
 Server logs will show all incoming requests and database operations.
 
-## 🛠️ Development
+## Development
 
 ### Add New Game
 1. Add game name to `models/Score.js` enum
@@ -318,7 +318,7 @@ Server logs will show all incoming requests and database operations.
 ### Custom Queries
 Add new routes in `routes/` directory following existing patterns.
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### MongoDB Connection Failed
 ```
@@ -355,7 +355,7 @@ kill -9 <PID>
 ### Validation Errors
 Check that your request data matches the schema requirements in `models/`.
 
-## 📦 Production Deployment
+## Production Deployment
 
 ### Heroku
 ```bash
@@ -378,7 +378,7 @@ pm2 start server.js --name playzone-api
 pm2 save
 ```
 
-## 🔒 Security Notes
+## Security Notes
 
 - Never commit `.env` file
 - Use strong passwords for production MongoDB
@@ -387,16 +387,16 @@ pm2 save
 - Validate all user inputs
 - Use HTTPS in production
 
-## 📝 Scripts
+## Scripts
 
 - `npm start` - Start production server
 - `npm run dev` - Start development server with auto-reload
 
-## 📄 License
+## License
 
 ISC
 
-## 🤝 Support
+## Support
 
 For issues or questions, check:
 1. MongoDB connection string
