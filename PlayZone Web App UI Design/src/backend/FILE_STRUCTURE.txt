@@ -1,0 +1,194 @@
+PlayZone Backend - Complete File Structure
+===========================================
+
+backend/
+│
+├── config/
+│   └── db.js                    # MongoDB connection configuration
+│                                # Handles connection, error events, and graceful shutdown
+│
+├── models/
+│   ├── Player.js                # Player schema (MongoDB model)
+│   │                            # Fields: name, email, avatar, totalGamesPlayed, etc.
+│   │                            # Indexes on: name, email, createdAt
+│   │
+│   └── Score.js                 # Score schema (MongoDB model)
+│                                # Fields: playerName, gameName, score, moves, etc.
+│                                # Indexes on: gameName+score, playerName, createdAt
+│                                # Supports 7 games: Connect Four, 2048, Tic Tac Toe,
+│                                #   Memory Match, Blackjack, Chess Master, Puzzle Master
+│
+├── routes/
+│   ├── players.js               # Player-related API endpoints
+│   │                            # POST /api/players - Create/get player
+│   │                            # GET /api/players/:name - Get player by name
+│   │                            # GET /api/players/:name/stats - Player statistics
+│   │                            # GET /api/players - Get all players
+│   │                            # DELETE /api/players/:name - Delete player
+│   │
+│   ├── scores.js                # Score-related API endpoints
+│   │                            # POST /api/scores - Submit new score
+│   │                            # GET /api/scores - Get all scores
+│   │                            # GET /api/scores/player/:name - Player's scores
+│   │                            # GET /api/scores/game/:gameName - Game's scores
+│   │                            # GET /api/scores/:id - Get specific score
+│   │                            # DELETE /api/scores/:id - Delete score
+│   │
+│   └── leaderboard.js           # Leaderboard API endpoints
+│                                # GET /api/leaderboard - Global leaderboard (all games)
+│                                # GET /api/leaderboard/:gameName - Game leaderboard
+│                                # GET /api/leaderboard/best/:gameName - Best per player
+│                                # GET /api/leaderboard/recent/:gameName - Recent scores
+│                                # GET /api/leaderboard/stats/summary - Overall stats
+│
+├── server.js                    # Main Express server file
+│                                # - Initializes Express app
+│                                # - Connects to MongoDB
+│                                # - Configures CORS
+│                                # - Registers routes
+│                                # - Starts server on PORT 5000
+│                                # - Health check endpoint
+│
+├── package.json                 # Node.js dependencies and scripts
+│                                # Dependencies:
+│                                #   - express: Web framework
+│                                #   - mongoose: MongoDB ORM
+│                                #   - cors: Cross-origin requests
+│                                #   - dotenv: Environment variables
+│                                # Scripts:
+│                                #   - npm start: Production mode
+│                                #   - npm run dev: Development mode (nodemon)
+│
+├── .env.example                 # Environment variables template
+│                                # PORT=5000
+│                                # MONGODB_URI=mongodb://localhost:27017/playzone
+│
+├── .env                         # Actual environment variables (create from .example)
+│                                # ⚠️ DO NOT COMMIT TO GIT
+│
+├── .gitignore                   # Git ignore rules
+│                                # Ignores: node_modules/, .env, logs/
+│
+├── README.md                    # Complete backend documentation
+│                                # Installation, API docs, testing, deployment
+│
+├── START_HERE.md                # Quick start guide (5-minute setup)
+│
+└── FILE_STRUCTURE.txt           # This file - visual structure reference
+
+
+Key Files You Need to Create:
+==============================
+1. .env (from .env.example)
+2. All other files are ready to use!
+
+
+How Data Flows:
+===============
+1. Frontend → POST /api/scores → routes/scores.js
+2. routes/scores.js → models/Score.js → MongoDB
+3. MongoDB saves score document
+4. Frontend → GET /api/leaderboard → routes/leaderboard.js
+5. routes/leaderboard.js → queries MongoDB → returns sorted results
+6. Frontend displays on Leaderboard page
+
+
+MongoDB Collections Created Automatically:
+==========================================
+- players (player information)
+- scores (game scores and results)
+
+
+Installation Steps:
+===================
+1. cd backend
+2. npm install
+3. cp .env.example .env
+4. Edit .env (set MongoDB URI)
+5. npm run dev
+6. Visit http://localhost:5000/api/health
+
+
+Port Configuration:
+===================
+Default: 5000
+Change in: .env (PORT=5000)
+
+
+MongoDB Configuration:
+======================
+Local:
+  MONGODB_URI=mongodb://localhost:27017/playzone
+
+Cloud (Atlas):
+  MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/playzone
+
+
+API Base URL:
+=============
+Development: http://localhost:5000/api
+Production: https://your-domain.com/api
+
+
+Frontend Configuration:
+=======================
+File: /services/api.ts
+Set: USE_REAL_API = true
+Set: API_BASE_URL = 'http://localhost:5000/api'
+
+
+Testing:
+========
+Health Check:
+  curl http://localhost:5000/api/health
+
+Submit Score:
+  curl -X POST http://localhost:5000/api/scores \
+    -H "Content-Type: application/json" \
+    -d '{"playerName":"Test","gameName":"Connect Four","score":100}'
+
+Get Leaderboard:
+  curl http://localhost:5000/api/leaderboard
+
+
+Dependencies Installed:
+=======================
+Production:
+  - express: ^4.18.2
+  - mongoose: ^8.0.3
+  - cors: ^2.8.5
+  - dotenv: ^16.3.1
+
+Development:
+  - nodemon: ^3.0.2
+
+
+Important Notes:
+================
+✓ CORS is pre-configured (allows all origins for development)
+✓ All routes are RESTful
+✓ Validation is handled in models
+✓ Indexes are set for performance
+✓ Error handling is implemented
+✓ Logging is included
+✓ Compatible with all 7 PlayZone games
+
+
+Server Logs Show:
+=================
+- Incoming requests (method + path)
+- MongoDB connection status
+- Score submissions
+- Any errors or warnings
+
+
+Ready to Use:
+=============
+✓ All files are complete
+✓ No code changes needed
+✓ Just install dependencies and configure .env
+✓ Ready for production deployment
+
+
+Last Updated: 2025-01-15
+Version: 1.0.0
